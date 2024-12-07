@@ -1,0 +1,327 @@
+---
+title: "BIMM 143 Class 9 Structural Bioinformatics Pt1"
+author: "Daniel Gurholt (PID: A16767491)"
+format: pdf
+---
+
+The main database for structural data is called the PBD (Protein Data Bank). Let's see what it contains:
+
+Data from: https://www.rcsb.org/stats
+
+```{r}
+pdbdb<- read.csv("Data Export Summary.csv", row.names=1)
+pdbdb
+```
+
+
+>Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+```{r}
+pdbdb$Total
+```
+
+I need to remove the comma and convert to numeric to do math:
+```{r}
+as.numeric(sub(",", "", pdbdb$Total))
+#as.numeric(pdbdb$Total)
+```
+
+I could turn this into a function to fix the whole table or any future table I read like this
+
+```{r}
+x<- pdbdb$Total
+as.numeric( sub(",", "", x))
+```
+
+```{r}
+comma2numeric<- function(x) {
+  as.numeric( sub(",", "", x))
+}
+```
+
+Test it
+```{r}
+comma2numeric(pdbdb$X.ray)
+```
+
+```{r}
+apply(pdbdb,  2, comma2numeric)
+```
+
+##Or try a different read/import function
+```{r}
+library(readr)
+pdbdb<- read_csv("Data Export Summary.csv")
+pdbdb
+```
+
+>Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+```{r}
+sum(pdbdb$`X-ray`)/(sum(pdbdb$Total)) * 100
+```
+
+From the calculations above, 83.3% of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+>Q2: What proportion of structures in the PDB are protein?
+
+```{r}
+pdbdb$Total[1]/(sum(pdbdb$Total)) * 100
+```
+
+From the calculations above, 86.4% of structures in the PDB are protein?
+
+>Q3: Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB?
+
+There are 4,563 protease structures in the current PDB that showed up in the results.
+
+## Mol
+
+Mol* (pronounced "molstar") is a new web-based molecule viewer that we will need to learn the basics of here.
+
+ https://molstar.org/viewer/
+ 
+ We will use PDB code: 1HSG
+ 
+ ![A first image from molstar](1HSG.png)
+
+![Modified 1HSG from molstar](Modified 1HSG.png)
+
+![Molecular Surface Pore 1HSG from molstar](Molecular 1HSG.png)
+
+>Q4: Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure?
+
+We just see the oxygen atom of the water molecule in this structure because there is so much water around to stabilize the protein that adding the hydrogen atoms would make it hard to visualize and analyze. Additionally, all the atoms on the proteins do not show the hydrogen present as well so it reduces overall complexity while still showing bonds and interactions which mainly occurs on the oxygen atom anyways.
+
+>Q5: There is a critical “conserved” water molecule in the binding site. Can you identify this water molecule? What residue number does this water molecule have
+
+Yes I found the critical “conserved” water molecule in the binding site and it has water residue number 308
+
+>Q6: Generate and save a figure clearly showing the two distinct chains of HIV-protease along with the ligand. You might also consider showing the catalytic residues ASP 25 in each chain and the critical water (we recommend “Ball & Stick” for these side-chains). Add this figure to your Quarto document.
+
+![water, chains, ASP 25 in 1HSG from molstar](Q6.png)
+
+
+![Critical conserved water 308 in 1HSG from molstar](water.png)
+
+## The Bio3D package
+
+The bio3d package allows us to do all sorts of structural bioinformatics work in R.
+
+Let's start with how it can read these PDB files:
+
+```{r}
+library (bio3d)
+
+pdb<- read.pdb("1hsg")
+pdb
+```
+
+```{r}
+attributes(pdb)
+```
+
+```{r}
+head(pdb$atom)
+```
+
+```{r}
+pdbseq(pdb)[25]
+```
+
+>Q7: How many amino acid residues are there in this pdb object? 
+
+```{r}
+sum(pdb$calpha)
+```
+
+There are 198 amino acid residues in this pdb object
+
+>Q8: Name one of the two non-protein residues? 
+
+HOH and MK1
+
+>Q9: How many protein chains are in this structure? 
+
+```{r}
+unique(pdb$atom$chain)
+```
+
+There are 2 unique protein chains are in this structure. chains A and B
+
+##Predicting functional motions of a single structure
+
+Let's do a bioinformatics prediction of functional motions - i.e the movements that one of these molecules needs to make to do its stuff.
+
+```{r}
+adk<- read.pdb("6s36")
+adk
+```
+
+```{r}
+#perform a flexibility prediction
+
+m<- nma(adk)
+plot(m)
+```
+
+Write out a multi_model PDB file that we can use to make an animation of the predicted motions.
+
+```{r}
+mktrj(m, file="adk.pdb")
+```
+
+I can open this in molstar to play the trajectory
+
+##Comparative structure analysis of Adenylate Kinase
+
+>Q10. Which of the packages above is found only on BioConductor and not CRAN? 
+
+msa is found only on BioConductor and not CRAN
+
+>Q11. Which of the above packages is not found on BioConductor or CRAN?: 
+
+Bio3d-view is not found on BioConductor or CRAN.
+
+>Q12. True or False? Functions from the devtools package can be used to install packages from GitHub and BitBucket? 
+
+TRUE, functions from the devtools package can be used to install packages from GitHub and BitBucket
+
+##Comparative Analysis of protein structures
+##Search and retrieve ADK structures
+
+```{r}
+library(bio3d)
+
+## Here we will find and analyze all ADK structures in the PBD database
+aa <- get.seq("1ake_A")
+aa
+```
+
+>Q13. How many amino acids are in this sequence, i.e. how long is this sequence? 
+
+```{r}
+length(aa$ali)
+```
+
+There are 214 amino acids are in this sequence which means it is 214 amino acids in length just by looking at the sequencing results above.
+
+```{r}
+#b <- blast.pdb(aa)
+```
+
+```{r}
+#hits <- plot(b)
+```
+
+```{r}
+#head(hits$pdb.id)
+```
+
+##Pre calculated Results
+
+```{r}
+hits <- NULL
+hits$pdb.id <- c('1AKE_A','6S36_A','6RZE_A','3HPR_A','1E4V_A','5EJE_A','1E4Y_A','3X2S_A','6HAP_A','6HAM_A','4K46_A','3GMT_A','4PZL_A')
+```
+
+```{r}
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+
+##Align and superpose structures
+
+```{r}
+pdbs <- pdbaln(files, fit = TRUE, exefile="msa")
+```
+
+```{r}
+# Align releated PDBs
+pdbs <- pdbaln(files, fit = TRUE, exefile="msa")
+```
+```{r}
+pdbs
+```
+
+```{r}
+# Vector containing PDB codes for figure axis
+ids <- basename.pdb(pdbs$id)
+
+# Draw schematic alignment
+#plot(pdbs, labels=ids)
+```
+
+```{r}
+anno <- pdb.annotate(ids)
+unique(anno$source)
+anno
+```
+
+##Principal component analysis
+
+```{r}
+pc.xray <- pca(pdbs)
+plot(pc.xray)
+```
+
+```{r}
+# Visualize first principal component
+pc1 <- mktrj(pc.xray, pc=1, file="pc_1.pdb")
+```
+
+```{r}
+plot(pc.xray, pc.axes = c(1,2))
+```
+
+
+```{r}
+# Calculate RMSD
+rd <- rmsd(pdbs)
+
+# Structure-based clustering
+hc.rd <- hclust(dist(rd))
+grps.rd <- cutree(hc.rd, k=3)
+
+plot(pc.xray, 1:2, col="grey50", bg=grps.rd, pch=21, cex=1)
+```
+
+```{r}
+library(ggplot2)
+library(ggrepel)
+
+df <- data.frame(PC1=pc.xray$z[,1], 
+                 PC2=pc.xray$z[,2], 
+                 col=as.factor(grps.rd),
+                 ids=ids)
+
+p <- ggplot(df) + 
+  aes(PC1, PC2, col=col, label=ids) +
+  geom_point(size=2) +
+  geom_text_repel(max.overlaps = 20) +
+  theme(legend.position = "none")
+p
+```
+
+##Normal mode analysis [optional]
+
+```{r}
+modes <- nma(pdbs)
+plot(modes, pdbs, col=grps.rd)
+```
+
+>Q14. What do you note about this plot? Are the black and colored lines similar or different? Where do you think they differ most and why?
+
+When looking at this plot, I notice there are two main areas of high peaks or fluctuations where the black line is, for the most part, always below the colored lines and do not peak that much. However the two colored lines peak quite dramatically at certain residues of the protein which could possibly point to certain areas of the reference protein where there is a lot of conformation possibilities of similar proteins when the protein folds which dictates its function.
+
+##Using ALpha Fold to predict protein structure to use in Molstar
+
+![Molecular Surface Pore 1HSG from molstar](Gene project protein.png)
+
+
+
+
+
+
+
+
+
