@@ -1,7 +1,7 @@
 ---
 title: "BIMM 143 Lab 6"
 author: "Daniel Gurholt (PID: A16767491)"
-format: pdf
+format: gfm
 ---
 
 Today we are going to explore R functions and begin to think about writting our own functions
@@ -59,7 +59,7 @@ try on student 2
 student2
 mean(student2, na.rm=TRUE)
 mean(student2)
-mean(na.omit[student2])
+mean(na.omit(student2))
 mean(is.na(student2))
 ```
 
