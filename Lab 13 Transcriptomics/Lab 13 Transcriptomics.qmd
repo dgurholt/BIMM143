@@ -1,7 +1,7 @@
 ---
 title: "Lab 13 Transcriptomics"
 author: "Daniel Gurholt (PID: A16767491)"
-format: pdf
+format: gfm
 ---
 
 Today we will analyze some RNASeq data from Hines et al. on the effects of dexamethasome (dex), a synthetic glucocorticoid steroid with anti-inflammatory effects, in four different ASM cell lines treated with dexamethasone glucocorticoid.
