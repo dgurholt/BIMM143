@@ -1,7 +1,7 @@
 ---
 title: "BIMM 143 Lab 7"
 author: "Daniel Gurholt (PID: A16767491)"
-format: pdf
+format: gfm
 ---
 
 Today we are going to learn how to apply different machine learning methods, beginning with clustering:
