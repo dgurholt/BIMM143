@@ -1,7 +1,7 @@
 ---
 title: "Lab 14 RNA-Seq analysis mini-project"
 author: "Daniel Gurholt (PID: A16767491)"
-format: pdf
+format: gfm
 ---
 
 ##Our intention is typically to use such lists to gain novel insights about genes and proteins that may have roles in a given phenomenon, phenotype or disease progression. However, in many cases these 'raw' gene lists are challenging to interpret due to their large size and lack of useful annotations. Hence, our expensively assembled gene lists often fail to convey the full degree of possible insight about the condition being studied.
