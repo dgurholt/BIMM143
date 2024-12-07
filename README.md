@@ -11,4 +11,4 @@ Classwork for [BIMM143](https://bioboot.github.io/bimm143_F24/schedule/) F24 at 
 
 - Class 14: [RNA-Seq mini project](https://github.com/dgurholt/BIMM143/blob/main/Lab%2014%20RNA-Seq%20analysis%20mini-project/Lab%2014%20RNA-Seq%20analysis%20mini-project.md)
 
-- Class 15: [Investigating pertussis resurgence mini project]()
+- Class 15: [Investigating pertussis resurgence mini project](https://github.com/dgurholt/BIMM143/blob/main/Lab%2015%20Investigating%20Pertussis%20Resurgence%20Mini%20Lab/Lab%2015%20Investigating%20Pertussis%20Resurgence%20Mini%20Lab.md)
