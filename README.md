@@ -9,7 +9,7 @@ Classwork for [BIMM143](https://bioboot.github.io/bimm143_F24/schedule/) F24 at 
 
 - Class 8: [Unsupervised learning mini-project]()
 
-- Class 9: [Structural Bioinformatics]()
+- Class 9: [Structural Bioinformatics](https://github.com/dgurholt/BIMM143/blob/main/BIMM%20143%20Class%209/BIMM%20143%20Class%209.md)
 
 - Class 10: [Halloween Candy mini-project]()
 
