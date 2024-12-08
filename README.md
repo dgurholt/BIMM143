@@ -11,7 +11,7 @@ Classwork for [BIMM143](https://bioboot.github.io/bimm143_F24/schedule/) F24 at 
 
 - Class 9: [Structural Bioinformatics](https://github.com/dgurholt/BIMM143/blob/main/BIMM%20143%20Class%209/BIMM%20143%20Class%209.md)
 
-- Class 10: [Halloween Candy mini-project]()
+- Class 10: [Halloween Candy mini-project](https://github.com/dgurholt/BIMM143/blob/main/Lab%2010%20Halloween%20Mini%20Project/Lab%2010%20Halloween%20Mini%20Project.md)
 
 - Class 11: [Structural Bioinformatics (pt2 AlphaFold)]()
 
