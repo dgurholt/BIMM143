@@ -1,7 +1,7 @@
 ---
 title: "Lab 10 Halloween Candy Mini Project"
 author: "Daniel Gurholt (PID: A16767491)"
-format: pdf
+format: gfm
 ---
 
 ##Importing candy data
