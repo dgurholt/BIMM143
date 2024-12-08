@@ -1,7 +1,7 @@
 ---
 title: "Lab 12 Genome Informatics HW Pop Analysis"
 author: "Daniel Gurholt (PID: A16767491)"
-format: pdf
+format: gfm
 ---
 
 ## Section 4: Population Scale Analysis [HOMEWORK]
