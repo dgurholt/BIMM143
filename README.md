@@ -15,7 +15,7 @@ Classwork for [BIMM143](https://bioboot.github.io/bimm143_F24/schedule/) F24 at 
 
 - Class 11: [Structural Bioinformatics (pt2 AlphaFold)]()
 
-- Class 12: [Genome informatics and high throughput sequencing]()
+- Class 12: [Genome informatics and high throughput sequencing](https://github.com/dgurholt/BIMM143/blob/main/Lab%2012%20Genome%20Informatics%20HW%20Pop%20Analysis/Lab%2012%20Genome%20Informatics%20HW%20Pop%20Analysis.md)
 
 - Class 13: [Transcriptomics, RNA Seq analysis, and the interpretation of gene lists](https://github.com/dgurholt/BIMM143/blob/main/Lab%2013%20Transcriptomics/Lab%2013%20Transcriptomics.md)
 
