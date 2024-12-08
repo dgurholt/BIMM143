@@ -1,7 +1,7 @@
 ---
 title: "BIMM 143 Class 9 Structural Bioinformatics Pt1"
 author: "Daniel Gurholt (PID: A16767491)"
-format: pdf
+format: gfm
 ---
 
 The main database for structural data is called the PBD (Protein Data Bank). Let's see what it contains:
